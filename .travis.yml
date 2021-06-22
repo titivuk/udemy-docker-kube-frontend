@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true udemy-docker-kube/frontend yarn test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "udemy-docker-kube-frontend"
+  env: "Udemydockerkubefrontend-env"
+  bucket_name: "elasticbeanstalk-eu-west-1-776251884493"
+  bucket_path: "udemy-docker-kube-frontend"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
